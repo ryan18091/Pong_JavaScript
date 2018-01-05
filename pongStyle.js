@@ -56,33 +56,115 @@ function anim(e){
 document.onkeydown = anim;
 
 var posTop = 200;
-var posLeft = 0;
+var posLeft = 300;
+
 
 function startMove() {
   var ball = document.getElementById("ball");
-  var id = setInterval(frame, 10);
+  var id = setInterval(frame, 15);
   var move = 'right';
+  var upDown = 'down'
+  var angle = 1
   function frame() {
       function moveRight() {
-          if (posLeft == 580 && rightPaddleTop >= 100 && rightPaddleTop <= 200) {
+          // Detects colision with right Paddle and starts moveLeft Functions
+          if (posLeft == 580 && rightPaddleTop <= posTop && (rightPaddleTop + 100) >= posTop) {
               move = 'left';
-              console.log(rightPaddleTop);
+              console.log(posTop);
               moveLeft();
-          } else if (posLeft <= 600) {
+          // Detects if ball has collided with far right line
+          } else if (posLeft >= 590){
               posLeft += 1;
               ball.style.left = posLeft + 'px';
+              clearInterval(id);
+          // Detects if ball has collided with top line and switched movement to down
+          } else if (posTop == 0) {
+                  posTop += 1;
+                  posLeft += 1;
+                  upDown = 'down';
+                  ball.style.left = posLeft + 'px';
+                  ball.style.top = posTop + 'px';
+          //Detects if ball has collided with bottom line and switched movement to up
+          } else if (posTop >= 390) {
+              posTop -= 1;
+              posLeft += 1;
+              upDown = 'up';
+              ball.style.left = posLeft + 'px';
+              ball.style.top = posTop + 'px';
+              //clearInterval(id);
+          //If ball has not collided with an object its movements is determined by the upDown var
           } else {
-              posLeft += 1;
-              ball.style.left = posLeft + 'px';
+              if (upDown == 'up'){
+                  posTop -= 1;
+                  posLeft += 1;
+                  ball.style.left = posLeft + "px";
+                  ball.style.top = posTop + 'px';
+              } else {
+                  posTop += 1;
+                  posLeft += 1;
+                  ball.style.left = posLeft + "px";
+                  ball.style.top = posTop + "px";
+              }
+
           }
       }
       function moveLeft() {
-          if (posLeft == 0) {
+          // Detects colision with left Paddle and starts moveRight Functions
+          if (posLeft == 10 && leftPaddleTop <= posTop && (leftPaddleTop + 100) >= posTop) {
               move = 'right';
               moveRight();
-          } else {
+          // Detects if ball has collided with far left line
+          } else if (posLeft <=0){
               posLeft -= 1;
-              ball.style.left = posLeft + "px";
+              ball.style.left = posLeft + 'px';
+              console.log('1');
+              console.log('leftPaddleTop' + leftPaddleTop)
+              console.log('postop' + posTop)
+
+              clearInterval(id);
+          // Detects if ball has collided with top line and switched movement to down
+          } else if (posTop == 0) {
+                  posTop += 1;
+                  posLeft -= 1;
+                  upDown = 'down';
+                  ball.style.left = posLeft + 'px';
+                  ball.style.top = posTop + 'px';
+
+                                console.log('2');
+
+                                //clearInterval(id);
+          //Detects if ball has collided with bottom line and switched movement to up
+          } else if (posTop >= 390) {
+              posTop -= 1;
+              posLeft -= 1;
+              upDown = 'up';
+              ball.style.left = posLeft + 'px';
+              ball.style.top = posTop + 'px';
+                            console.log('3');
+
+              //clearInterval(id);
+          //If ball has not collided with an object its movements is determined by the upDown var
+          } else {
+              if (upDown == 'up'){
+                  posTop -= 1;
+                  posLeft -= 1;
+                  ball.style.left = posLeft + "px";
+                  ball.style.top = posTop + 'px';
+                                console.log('4');
+
+                                //clearInterval(id);
+
+              } else {
+                  posTop += 1;
+                  posLeft -= 1;
+                  ball.style.left = posLeft + "px";
+                  ball.style.top = posTop + "px";
+                                //console.log('5');
+
+                                //clearInterval(id);
+
+              }
+
           }
 
       }
@@ -93,18 +175,6 @@ function startMove() {
           moveLeft();
       }
 
-    /*
-    if (posTop == 390) {
-      clearInterval(id);
-      posTop -=1
-      //posTop = 0;
-      elem.style.top = posTop + 'px';
-    } else {
-      posTop++;
-      elem.style.top = posTop + 'px';
-      //console.log(posTop);
-      //elem.style.left = pos + 'px';
-    }*/
   }
 }
 
