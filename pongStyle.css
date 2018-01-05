@@ -1,0 +1,46 @@
+html {
+    height: 100%;
+}
+
+.Field {
+    position: relative;
+    height:400px;
+    width: 600px;
+    outline: 1px solid black;
+
+}
+
+.paddle {
+    height: 100px;
+    width: 10px;
+    background-color: black;
+    position: absolute;
+    top: 80px;
+    /*margin: 10px;*/
+}
+
+#ball {
+    height: 10px;
+    width: 10px;
+    background-color: black;
+    position: relative;
+     /*margin: auto;*/
+     top: 200px;
+     left: 300px;
+}
+
+#leftPaddle {
+    left: 0;
+
+}
+
+#rightPaddle {
+    right: 0;
+}
+
+#myAnimation {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background-color: red;
+}
